@@ -1,2 +1,2 @@
 # micro-frontends
-App for demonstrate the concept of micro-frontends with different approaches 
+App to demonstrate the concept of micro-frontends with different approaches 
