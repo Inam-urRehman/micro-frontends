@@ -5,6 +5,9 @@
   "repository": "https://github.com/Inam-urRehman/micro-frontends.git",
   "author": "Inam-urRehman",
   "license": "MIT",
+  "scripts": {
+    "dev": "bash ./dev.sh"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.1",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -18,12 +21,9 @@
     "css-minimizer-webpack-plugin": "^1.1.5",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.0.0",
-    "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^4.0.4",
     "postcss-preset-env": "^6.7.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.0",
@@ -39,6 +39,9 @@
     "demo-integration"
   ],
   "dependencies": {
-    "react-router-dom": "^5.2.0"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "node-sass": "^4.14.1"
   }
 }

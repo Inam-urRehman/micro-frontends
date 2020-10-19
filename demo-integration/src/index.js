@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 
-import {BuildTimeIntegration, IframeIntegration} from "./components"
+import {BuildTimeIntegration, IframeIntegration, JsIntegration} from "./components"
 
 export default function App() {
   return (
@@ -24,9 +24,9 @@ export default function App() {
             <li>
               <Link to="/run-time-integration-via-iframe">Run Time Integration Via iframe</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/run-time-integration-via-js">Run Time Integration Via Javascript</Link>
-            </li> */}
+            </li>
           </ul>
         </nav>
 
@@ -39,9 +39,9 @@ export default function App() {
           <Route path="/run-time-integration-via-iframe">
             <IframeIntegration />
           </Route>
-          {/* <Route path="/run-time-integration-via-js">
+          <Route path="/run-time-integration-via-js">
             <JsIntegration />
-          </Route> */}
+          </Route>
         </Switch>
       </div>
     </Router>

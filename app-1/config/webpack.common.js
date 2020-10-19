@@ -1,8 +1,10 @@
-const paths = require("./paths");
-
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { container: { ModuleFederationPlugin } } = require("webpack");
+
+const paths = require("./paths");
+
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -12,11 +14,30 @@ module.exports = {
   output: {
     path: paths.build,
     filename: "[name].bundle.js",
-    publicPath: "/",
+    publicPath: "http://localhost:3001/",
   },
 
   // Customize the webpack build process
   plugins: [
+    new ModuleFederationPlugin({
+      name: "microFeApp1",
+      library: { type: "var", name: "microFeApp1" },
+      filename: "remoteEntry.js",
+      exposes: {
+        "./header": paths.src + "/components/header/index.js",
+      },
+      shared: {
+        react: {
+          eager: true,
+          singleton: true,
+        },
+        "react-dom": {
+          eager: true,
+          singleton: true,
+        }
+      }
+    }),
+
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
 
@@ -79,5 +100,5 @@ module.exports = {
       // Fonts and SVGs: Inline files
       { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: "asset/inline" },
     ],
-  },
+  }
 };

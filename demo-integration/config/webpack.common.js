@@ -1,8 +1,10 @@
-const paths = require('./paths')
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { container: { ModuleFederationPlugin } } = require("webpack");
+
+const paths = require('./paths')
+
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -17,6 +19,25 @@ module.exports = {
 
   // Customize the webpack build process
   plugins: [
+    new ModuleFederationPlugin({
+      name: "container-app",
+      library: { type: "var", name: "container-app" },
+      remotes: {
+        "microFeApp1": "microFeApp1",
+        "microFeApp2": "microFeApp2",
+      },
+      shared: {
+        react: {
+          eager: true,
+          singleton: true,
+        },
+        "react-dom": {
+          eager: true,
+          singleton: true,
+        }
+      },
+    }),
+
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
 
@@ -64,17 +85,17 @@ module.exports = {
         test: /\.(scss|css)$/,
         use: [
           'style-loader',
-          {loader: 'css-loader', options: {sourceMap: true, importLoaders: 1}},
-          {loader: 'postcss-loader', options: {sourceMap: true}},
-          {loader: 'sass-loader', options: {sourceMap: true}},
+          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
 
       // Images: Copy image files to build folder
-      {test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource'},
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
 
       // Fonts and SVGs: Inline files
-      {test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline'},
+      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
     ],
-  },
+  }
 }
