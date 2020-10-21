@@ -5,7 +5,7 @@ App to demonstrate the concept of micro-frontends with different approaches
 `yarn install`
 
 ## Run applications
-Go to individual application and run following command
+Go to individual application and run following command <br/>
 `yarn start`
 
 In web-component, just open html file in browser
